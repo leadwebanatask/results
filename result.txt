@@ -10,7 +10,7 @@ in that case 0.30000000000000004 is not equal 0.3
 
 1.b Please suggest fix to make this expression working as expected.
 
-JavaScript introduced toFixed function which returns string value with specified number of decimals.
+JavaScript introduced toFixed function, which returns string value with specified number of decimals.
 ref: http://www.w3schools.com/jsref/jsref_tofixed.asp
 Also there is casting function called parseFloat.
 ref: http://www.w3schools.com/jsref/jsref_parsefloat.asp
@@ -42,9 +42,9 @@ function sum() {
 this function will accept unspecified number of arguments. 
 if ran without arguments will return 0,
 if single numeric argument was given it returns given argument
-if more than one numberic argument was given then it returns sum of numeric arguments. 
+if more than one numeric argument was given then it returns sum of numeric arguments. 
 
-sum() -> reutrns 0
+sum() -> returns 0
 sum(1) -> returns 1
 sum(1,2) -> returns 3
 sum(0.1,0.2) -> returns 0.3
@@ -68,7 +68,7 @@ for (var i = 0; i < 5; i++) {
 3.a    What will be the output when user clicks on Button 1 and why?
 
 output will be 5
-Since i is incrementing in scope above (outside function context) in moment
+Since 'i' is incrementing in scope above (outside function context) in moment
 when button is clicked i value is eq to 5. 
 
 3.b    Please, suggest a fix to get the expected behavior.
@@ -85,7 +85,7 @@ for (var i = 0; i < 5; i++) {
 }
 
 
-Above snippet creates a scope snapshot of i value and encapsulates it into anomyous function. 
+Above snippet creates a scope snapshot of i value and encapsulates it into anonymous function. 
 
 
 Task 4. Extracts all query strings from URL
@@ -121,7 +121,7 @@ setParams2DL(getParams(url));
 }
 
 introduced snippet uses given url or take browsed site URL. 
-getParams function extracts params into key values object.
+getParams function extracts parameters into key value object.
 setParams2DL saves data into datalayer property (datalayer usualy stores multiple values/objects)
 
 Task 5. Data layer Object
@@ -218,5 +218,14 @@ function loadDataLayer() {
 }
 
 
+Task 7. Native JavaScript functions
 
+Can you write down any native JavaScript functions that work in Chrome/Firefox and don't work in Internet Explorer or visa-versa?
 
+trim - is supported from IE9. 
+event.preventDefault wasnt supported in older IE's 
+XMLHttpRequest - was handled by activeX in IE5.x & IE6
+map function is not working in older IE's
+storage save methods are not working for Mobile Safari in private mode.
+indexOf / other array functions in olders IE's (a lot of array functions were introduced in IE 5.5)
+there are also functions witch are supported only by particular engines e.g. object watch (only gecko) or observe (Chrome)
