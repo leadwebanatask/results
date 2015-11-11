@@ -51,3 +51,41 @@ sum(0.1,0.2) -> returns 0.3
 sum(1,2,3,4,0.1) -> returns 10.1 
 sum(1,2,3,4,0.1,'10') -> returns 20.1
 sum(1,2,3,4,0.1,'10','10 apples') -> return 20.1 (non numeric arguments are ignored*)
+
+* it is just my assumption to ignore non numeric values against throwing exceptions. 
+
+Task 3. Loops.
+
+Consider you have code snippet like this:
+
+for (var i = 0; i < 5; i++) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  btn.addEventListener('click', function(){ console.log(i); });
+  document.body.appendChild(btn);
+}
+
+3.a    What will be the output when user clicks on Button 1 and why?
+
+output will be 5
+Since i is incrementing in scope above (outside function context) in moment
+when button is clicked i value is eq to 5. 
+
+3.b    Please, suggest a fix to get the expected behavior.
+
+for (var i = 0; i < 5; i++) {
+	(function(num) {
+		var btn = document.createElement('button');
+		btn.appendChild(document.createTextNode('Button ' + num));
+		btn.addEventListener('click', function() {
+			console.log(num);
+		});
+		document.body.appendChild(btn);
+	})(i);
+}
+
+
+Above snippet creates a scope snapshot of i value and encapsulates it into anomyous function. 
+
+
+
