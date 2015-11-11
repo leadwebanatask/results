@@ -17,7 +17,7 @@ function populateImageTag(url) {
 		if (url.substring(url.length - 1, url.length) !== "?" && url.substring(url.length - 1, url.length) !== "&" && url.indexOf("?") > -1) {
 			return url + "&";
 		}
-		
+
 		if (url.substring(url.length - 1, url.length) !== "?" && url.substring(url.length - 1, url.length) !== "&" && url.indexOf("?") === -1) {
 			return url + "?";
 		}
@@ -34,5 +34,5 @@ function populateImageTag(url) {
 	var src = document.createAttribute("src");
 	src.value = generateUrl(url);
 	img.setAttributeNode(src);
-    document.body.appendChild(img);
+	document.body.appendChild(img);
 }
