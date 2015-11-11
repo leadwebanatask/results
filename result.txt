@@ -176,3 +176,47 @@ ssl issues are handled differently in various browsers.
 recommended usage*: populateImageTag('//example.com/datacollector');
 this will save computing power on non ssl pages
 *this will fail on localfile protocol (file://...html)
+
+Task 6. Store and retrieve the data layer
+
+Write a JavaScript function to store and retrieve the 'datalayer' object from task-4 HTML5 storage.
+
+function saveDatalayer() {
+	window.datalayer = window.datalayer ? window.datalayer : {};
+	window.datalayer.params = window.datalayer.params ? window.datalayer.params : {};
+
+	if ( typeof Storage !== "undefined") {
+		try {
+			localStorage.setItem("datalayer", JSON.stringify(window.datalayer));
+		} catch (e) {
+			console.log('unable to save data in browser Storage', e);
+			//some browsers don't allow to save data in Storage in private mode. e.g. Mobile Safari.
+			// also above code will fail if datalayer has recuring properties like:
+			// var x = {};
+			// x.y =x ;
+		}
+	} else {
+		console.log('no storage support');
+	}
+
+}
+
+function loadDataLayer() {
+	if ( typeof Storage !== "undefined") {
+		try {
+			var retrievedData = localStorage.getItem("datalayer");
+			if (retrievedData !== null) {
+				window.datalayer = JSON.parse(retrievedData);
+			}
+		} catch (e) {
+			console.log('unable to retrieve data from storage', e);
+		}
+	} else {
+		console.log('no storage support');
+	}
+
+}
+
+
+
+
