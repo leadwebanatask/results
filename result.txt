@@ -18,4 +18,36 @@ ref: http://www.w3schools.com/jsref/jsref_parsefloat.asp
 below code will solve the issue. 
 Also please notice that parseFloat is not mandatory
 (in that case == will return true, but === will return false caused by different data types)
-console.log( parseFloat( (0.1 + 0.2).toFixed(5)  ) === parseFloat((0.3).toFixed(5)) )
+
+console.log( parseFloat( (0.1 + 0.2).toFixed(5)  ) === 0.3 )
+
+to ensure that compared values are casted / rounded in same way for more sophisticated equations 
+right hand side should be handled in same way parseFloat((0.3).toFixed(5))
+
+Task 2. Sum function.
+
+-Write a `sum` function which will work properly when invoked using syntax below: 
+console.log(sum(2,3)); // Outputs 5 
+
+function sum() {
+	var result = 0;
+	for (var arg in arguments) {
+		if (arguments.hasOwnProperty(arg) && !isNaN(arguments[arg])) {
+			result = parseFloat((result + arguments[arg]).toFixed(5));
+		}
+	}
+	return result;
+}
+
+this function will accept unspecified number of arguments. 
+if ran without arguments will return 0,
+if single numeric argument was given it returns given argument
+if more than one numberic argument was given then it returns sum of numeric arguments. 
+
+sum() -> reutrns 0
+sum(1) -> returns 1
+sum(1,2) -> returns 3
+sum(0.1,0.2) -> returns 0.3
+sum(1,2,3,4,0.1) -> returns 10.1 
+sum(1,2,3,4,0.1,'10') -> returns 20.1
+sum(1,2,3,4,0.1,'10','10 apples') -> return 20.1 (non numeric arguments are ignored*)
