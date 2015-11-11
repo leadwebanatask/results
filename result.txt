@@ -124,3 +124,55 @@ introduced snippet uses given url or take browsed site URL.
 getParams function extracts params into key values object.
 setParams2DL saves data into datalayer property (datalayer usualy stores multiple values/objects)
 
+Task 5. Data layer Object
+
+Write a JavaScript function which takes 'datalayer' object from task 4 and convert them in image tag as demonstrated below and append as child to 'body' tag.
+
+<img src="https://example.com/datacollector?pia.ca=72208039&pie.de=cbartens@datalicious.com&pin.gn=Christian&pin.fn=Bartens">
+
+
+
+function populateImageTag(url) {
+
+	//map function is not working in older IEs.
+	function encodeData(data) {
+		return Object.keys(data).map(function(key) {
+			return [key, data[key]].map(encodeURIComponent).join("=");
+		}).join("&");
+	}
+
+	function urlFix(url) {
+		if (url.substring(url.length - 1, url.length) === "?" || url.substring(url.length - 1, url.length) === "&") {
+			return url;
+		}
+
+		if (url.substring(url.length - 1, url.length) !== "?" && url.substring(url.length - 1, url.length) !== "&" && url.indexOf("?") > -1) {
+			return url + "&";
+		}
+		
+		if (url.substring(url.length - 1, url.length) !== "?" && url.substring(url.length - 1, url.length) !== "&" && url.indexOf("?") === -1) {
+			return url + "?";
+		}
+	}
+
+	function generateUrl(url) {
+		window.datalayer = window.datalayer ? window.datalayer : {};
+		window.datalayer.params = window.datalayer.params ? window.datalayer.params : {};
+		return urlFix(url) + encodeData(window.datalayer.params);
+	}
+
+	var img = document.createElement('img');
+	var src = document.createAttribute("src");
+	src.value = generateUrl(url);
+	img.setAttributeNode(src);
+    document.body.appendChild(img);
+}
+
+above snipped generates images tag with given url, there is also check what kind of url was given.
+usage: populateImageTag('https://example.com/datacollector');
+
+please ensure that given host has proper/valid ssl certyficate. 
+ssl issues are handled differently in various browsers. 
+recommended usage*: populateImageTag('//example.com/datacollector');
+this will save computing power on non ssl pages
+*this will fail on localfile protocol (file://...html)

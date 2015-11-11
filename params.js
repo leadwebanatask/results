@@ -2,7 +2,7 @@
 
 function extractParams(url) {
 	if (typeof url ==="undefined") {
-		url = window.location.href;
+		url = decodeURIComponent(window.location.href);
 	}
 
 function getParams(url) {
