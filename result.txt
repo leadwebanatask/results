@@ -1,6 +1,21 @@
 Task 1. Floats.
 
-Please explain why this code `console.log(0.1 + 0.2 == 0.3);` outputs `false` in console? 
+1.a Please explain why this code `console.log(0.1 + 0.2 == 0.3);` outputs `false` in console? 
+
+False result is caused by floating accuracy problems which were well described here: https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems
+so 0.1 + 0.2 should be equal to 0.3 but console.log(0.1 + 0.2) outputs: 0.30000000000000004
+in that case 0.30000000000000004 is not equal 0.3 
 
 
-Please suggest fix to make this expression working as expected.
+
+1.b Please suggest fix to make this expression working as expected.
+
+JavaScript introduced toFixed function which returns string value with specified number of decimals.
+ref: http://www.w3schools.com/jsref/jsref_tofixed.asp
+Also there is casting function called parseFloat.
+ref: http://www.w3schools.com/jsref/jsref_parsefloat.asp
+
+below code will solve the issue. 
+Also please notice that parseFloat is not mandatory
+(in that case == will return true, but === will return false caused by different data types)
+console.log( parseFloat( (0.1 + 0.2).toFixed(5)  ) === parseFloat((0.3).toFixed(5)) )
